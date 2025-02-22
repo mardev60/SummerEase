@@ -33,13 +33,6 @@
         <div class="flex gap-3">
             <button
                 type="button"
-                (click)="previousStep()"
-                class="btn-primary bg-gray-700 hover:bg-gray-600 border-gray-600 shadow-none flex-1"
-            >
-                <span class="relative z-10">Back</span>
-            </button>
-            <button
-                type="button"
                 [disabled]="!subscriptionForm.get('username')?.valid"
                 (click)="nextStep()"
                 class="btn-primary flex-1"
