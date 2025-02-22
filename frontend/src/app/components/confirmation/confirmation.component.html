@@ -1,18 +1,51 @@
 <div class="text-center">
-  <div class="glass-effect p-6 rounded-xl mb-8">
-    <div class="text-4xl mb-4">✨</div>
-    <h2 class="text-xl font-semibold text-blue-400 mb-2">
-      Abonnement confirmé !
-    </h2>
-    <p class="text-gray-400">
-      Votre première alerte arrivera demain à l'heure choisie.
-    </p>
-  </div>
-  
-  <button
-    (click)="reset.emit()"
-    class="btn-primary bg-gray-700 hover:bg-gray-600 border-gray-600 shadow-none"
-  >
-    Modifier mes préférences
-  </button>
+    <div class="bg-gray-800 p-6 rounded-xl mb-8 shadow-lg">
+        <h3 class="text-lg font-semibold text-gray-300 mb-4">
+            📲 Follow these steps:
+        </h3>
+        <div class="text-left text-gray-400 space-y-3">
+            <div class="flex items-center gap-3">
+                <span class="text-blue-400 text-lg">1️⃣</span>
+                <p>Open Telegram on your phone or computer.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-blue-400 text-lg">2️⃣</span>
+                <p>Click the button below to open the bot.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-blue-400 text-lg">3️⃣</span>
+                <p>Tap "Start" in the chat with the bot.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-blue-400 text-lg">4️⃣</span>
+                <p class="font-semibold text-green-400">
+                    Welcome! 🎉 You're all set!
+                </p>
+                <p class="font-semibold text-red-400">
+                    Send "/stop" to the bot, to unsubscribe !
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <a
+        [href]="telegramLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center w-full px-6 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-500 transition-all duration-300 ease-in-out"
+    >
+        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M9.09 12.92l-.33 4.02c.47 0 .68-.21.93-.46l2.23-2.13 4.63 3.42c.85.47 1.45.22 1.67-.79L22 6.55c.27-1.16-.44-1.68-1.21-1.4l-18.73 7.2c-1.15.44-1.12 1.08-.2 1.36l4.78 1.49 11.05-6.96c.52-.31.99-.14.6.2"
+            />
+        </svg>
+        Open in Telegram
+    </a>
+
+    <button
+        (click)="reset.emit()"
+        class="btn-primary mt-6 bg-gray-700 hover:bg-gray-600 border-gray-600 shadow-none w-full"
+    >
+        Modify Preferences
+    </button>
 </div>
