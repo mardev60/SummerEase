@@ -1,0 +1,146 @@
+<div class="step-indicator">
+  <div class="step-dot" [class.active]="currentStep === 1"></div>
+  <div class="step-dot" [class.active]="currentStep === 2"></div>
+  <div class="step-dot" [class.active]="currentStep === 3"></div>
+</div>
+
+<form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+  <!-- Step 1: Topic Selection -->
+  <div *ngIf="currentStep === 1" class="space-y-6" @fadeInOut>
+    <div>
+      <label for="topic" class="block text-sm font-medium text-gray-300 mb-2">
+        Choisissez votre sujet
+      </label>
+      <select
+        id="topic"
+        formControlName="topic"
+        class="input-field"
+      >
+        <option value="">Sélectionnez un sujet</option>
+        <option value="ai">🤖 IA</option>
+        <option value="climate">🌍 Climat</option>
+        <option value="tech">💻 Tech</option>
+        <option value="business">💼 Business</option>
+        <option value="health">🏥 Santé</option>
+      </select>
+    </div>
+    
+    <button
+      type="button"
+      [disabled]="!subscriptionForm.get('topic')?.valid"
+      (click)="nextStep()"
+      class="btn-primary w-full group"
+    >
+      <span class="relative z-10">Suivant</span>
+    </button>
+  </div>
+
+  <!-- Step 2: Time Selection -->
+  <div *ngIf="currentStep === 2" class="space-y-6" @fadeInOut>
+    <div>
+      <label for="alertTime" class="block text-sm font-medium text-gray-300 mb-2">
+        Choisissez l'heure de réception
+      </label>
+      <select
+        id="alertTime"
+        formControlName="alertTime"
+        class="input-field"
+      >
+        <option value="">Sélectionnez une heure</option>
+        <option *ngFor="let time of availableTimes" [value]="time.value">
+          {{ time.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="flex gap-3">
+      <button
+        type="button"
+        (click)="previousStep()"
+        class="btn-primary bg-gray-700 hover:bg-gray-600 border-gray-600 shadow-none flex-1"
+      >
+        <span class="relative z-10">Retour</span>
+      </button>
+      <button
+        type="button"
+        [disabled]="!subscriptionForm.get('alertTime')?.valid"
+        (click)="nextStep()"
+        class="btn-primary flex-1"
+      >
+        <span class="relative z-10">Suivant</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 3: WhatsApp Number -->
+  <div *ngIf="currentStep === 3" class="space-y-6" @fadeInOut>
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-2">
+        Votre numéro WhatsApp
+      </label>
+      <div class="phone-input-group">
+        <select
+          formControlName="countryCode"
+          class="country-select"
+          (change)="onCountryChange($event)"
+        >
+          <option value="">Pays</option>
+          <option *ngFor="let country of countries" [value]="country.code">
+            {{ country.flag }} {{ country.prefix }}
+          </option>
+        </select>
+        <input
+          type="tel"
+          formControlName="phoneNumber"
+          [placeholder]="getPlaceholder()"
+          class="input-field"
+          [class.border-red-500]="isPhoneInvalid()"
+        />
+      </div>
+      <p
+        *ngIf="isPhoneInvalid()"
+        class="mt-2 text-sm text-red-400"
+      >
+        Veuillez entrer un numéro valide
+      </p>
+    </div>
+
+    <div class="flex gap-3">
+      <button
+        type="button"
+        (click)="previousStep()"
+        class="btn-primary bg-gray-700 hover:bg-gray-600 border-gray-600 shadow-none flex-1"
+      >
+        <span class="relative z-10">Retour</span>
+      </button>
+      <button
+        type="submit"
+        [disabled]="!isFormValid() || isSubmitting"
+        class="btn-primary flex-1 relative"
+      >
+        <span *ngIf="!isSubmitting" class="relative z-10">Valider</span>
+        <svg
+          *ngIf="isSubmitting"
+          class="animate-spin h-5 w-5 mx-auto relative z-10"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</form>
