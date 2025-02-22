@@ -6,27 +6,18 @@
             <div
                 class="inline-flex items-center justify-center p-2 mb-4 rounded-2xl glass-effect"
             >
-                <svg
-                    class="w-8 h-8 text-blue-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                <img 
+                    src="https://i.ibb.co/7trZ5Stk/logo-1.png" 
+                    alt="SummerEase Logo" 
+                    class="w-12 h-12"
                 >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-                    />
-                </svg>
             </div>
             <h1
                 class="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text"
             >
                 SummerEase
             </h1>
-            <p class="text-lg text-gray-400">
+            <p class="text-lg text-gray-400 mb-6">
                 Receive your news in audio every morning on Telegram
             </p>
         </div>
@@ -40,5 +31,13 @@
             *ngIf="showConfirmation"
             (reset)="resetForm()"
         ></app-confirmation>
+        <div class="flex items-center justify-center gap-2 bg-gray-800/50 p-3 mt-8 rounded-lg">
+            <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M9.09 12.92l-.33 4.02c.47 0 .68-.21.93-.46l2.23-2.13 4.63 3.42c.85.47 1.45.22 1.67-.79L22 6.55c.27-1.16-.44-1.68-1.21-1.4l-18.73 7.2c-1.15.44-1.12 1.08-.2 1.36l4.78 1.49 11.05-6.96c.52-.31.99-.14.6.2"
+                />
+            </svg>
+            <span class="text-gray-300">Made with ❤️ by <a href="https://www.linkedin.com/in/marouan-makil/" class="text-blue-400 hover:underline">Marouan</a> and <a href="https://www.linkedin.com/in/emmanuel-niasse/" class="text-blue-400 hover:underline">Emmanuel</a></span>
+        </div>
     </div>
 </div>
