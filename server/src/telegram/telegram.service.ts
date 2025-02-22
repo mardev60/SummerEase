@@ -17,24 +17,41 @@ export class TelegramService {
       const token = match?.[1];
 
       if (!token) {
-        this.bot.sendMessage(chatId, 'Erreur !');
+        this.bot.sendMessage(
+          chatId,
+          '❌ Oops! It seems the activation link is incorrect. Please try again.'
+        );
         return;
       } else {
         try {
           await this.airtableService.updateChatId(chatId, token);
-          this.bot.sendMessage(chatId, 'Parfait !');
+          this.bot.sendMessage(
+            chatId,
+            `✅ Subscription successful!\n\nYou will now receive your daily newsletter every morning around 9am (Paris time).\n\nIf you wish to unsubscribe at any time, simply send the /stop command.\n\nHappy reading! 📰`
+          );
         } catch (error) {
+          this.bot.sendMessage(
+            chatId,
+            '❌ An error occurred during your subscription. Please try again later.'
+          );
           return error;
         }
       }
     });
 
-    this.bot.onText(/\/stop/, async (msg, match) => {
+    this.bot.onText(/\/stop/, async (msg) => {
       const chatId = msg.chat.id;
       try {
         await this.airtableService.unsubscribeUser(chatId);
-        this.bot.sendMessage(chatId, 'Stop pris en compte !');
+        this.bot.sendMessage(
+          chatId,
+          '✅ Unsubscription successful!\n\nYou will no longer receive newsletters. We\'re sorry to see you go.\n\nIf you change your mind, you can always resubscribe using the same activation link. See you soon, perhaps! 👋'
+        );
       } catch (e) {
+        this.bot.sendMessage(
+          chatId,
+          '❌ An error occurred during your unsubscription. Please try again later.'
+        );
         console.log(e);
       }
     });
