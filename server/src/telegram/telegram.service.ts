@@ -8,7 +8,7 @@ export class TelegramService {
   private readonly logger = new Logger(TelegramService.name);
 
   constructor(private readonly airtableService: AirtableService) {
-    const token = 'apiKEY';
+    const token = process.env.TELEGRAM_BOT_TOKEN;
 
     this.bot = new TelegramBot(token, { polling: true });
 

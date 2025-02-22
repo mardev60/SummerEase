@@ -8,8 +8,8 @@ export class AirtableService {
 
   constructor() {
     this.base = new Airtable({
-      apiKey: 'apiKey',
-    }).base('dbID');
+      apiKey: process.env.AIRTABLE_API_KEY,
+    }).base(process.env.AIRTABLE_BASE_ID);
   }
 
   async createSubject(subject: string, name: string, token: string) {
@@ -31,32 +31,35 @@ export class AirtableService {
 
   async updateChatId(chatId: string, token: string) {
     try {
-      // Rechercher tous les enregistrements avec le même chat_id
-      const existingChatRecords = await this.base('news_db')
+      const existingRecords = await this.base('news_db')
         .select({ filterByFormula: `{chat_id} = '${chatId}'` })
         .firstPage();
 
-      // Supprimer tous les enregistrements trouvés avec ce chat_id
-      if (existingChatRecords.length > 0) {
-        await this.base('news_db').destroy(
-          existingChatRecords.map((record) => record.id),
-        );
-        console.log(
-          `Supprimé ${existingChatRecords.length} enregistrement(s) avec chat_id ${chatId}`,
-        );
+      if (existingRecords.length > 0) {
+        await Promise.all(existingRecords.map(record => 
+          this.base('news_db').destroy(record.id)
+        ));
+        console.log(`Deleted ${existingRecords.length} records with chat_id ${chatId}`);
       }
 
-      // Insérer la nouvelle ligne avec le chat_id et le token
-      await this.base('news_db').create({
-        chat_id: chatId.toString(),
-        token: token,
+      const records = await this.base('news_db')
+        .select({ filterByFormula: `{token} = '${token}'` })
+        .firstPage();
+
+      if (records.length === 0) {
+        throw new Error('No record found with this token');
+      }
+
+      await this.base('news_db').update(records[0].id, {
+        chat_id: chatId.toString()
       });
 
       console.log(
-        `Nouvel enregistrement ajouté avec chat_id ${chatId} et token ${token}`,
+        `Updated record with token ${token} to have chat_id ${chatId}`,
       );
     } catch (error) {
-      console.error('Erreur dans updateChatId:', error);
+      console.error('Error in updateChatId:', error);
+      throw error;
     }
   }
 
