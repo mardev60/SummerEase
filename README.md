@@ -1,4 +1,6 @@
-# SummerEase 📰
+<img src="https://raw.githubusercontent.com/mardev60/newsvoice/refs/heads/main/frontend/src/assets/logo_1.png"/>
+
+# SummerEase
 
 SummerEase is a modern web application that delivers personalized news content in audio format directly to users via Telegram. Built with Angular for the frontend and NestJS for the backend, it provides a seamless experience for users to subscribe to their preferred news topics and receive daily audio updates.
 
