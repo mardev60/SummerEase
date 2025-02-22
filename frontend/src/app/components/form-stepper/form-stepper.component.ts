@@ -61,7 +61,7 @@ export class FormStepperComponent {
             const subject = this.subscriptionForm.get("topic")?.value;
 
             this.http
-                .post("http://localhost:3000", { username, subject })
+                .post("https://newsvoice.onrender.com/", { username, subject })
                 .subscribe({
                     next: (data: any) => {
                         localStorage.setItem("tg_link", data.telegram_link);
