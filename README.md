@@ -119,9 +119,9 @@ We welcome contributions! To contribute, follow these steps:
 
 ---
 
-## 📄 License
+## 📄 Video demo
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/deRo3f3wlDg" frameborder="0" allowfullscreen></iframe>
 
 ---
 
