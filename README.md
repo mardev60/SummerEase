@@ -121,7 +121,8 @@ We welcome contributions! To contribute, follow these steps:
 
 ## 📄 Video demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/deRo3f3wlDg" frameborder="0" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/deRo3f3wlDg/maxresdefault.jpg)](https://www.youtube.com/watch?v=deRo3f3wlDg)
+
 
 ---
 
